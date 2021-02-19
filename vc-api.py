@@ -19,12 +19,18 @@
 
 DEBUG = True
 
+# print debug
 def printd(str):
     if DEBUG:
-        print(str)
+        warning_color = "\033[93m"
+        end_color = "\033[0m"
+        print(f"{warning_color}{str}{end_color}")
 
-# given a config file, opens it into a python object
-# for now, only deals with TOML. Refactor if you need another config file structure. 
+"""
+open_config:
+    given a config file, opens it into a python object
+    for now, only deals with TOML. Refactor if you need another config file structure. 
+"""
 def open_config(config_filepath):
     import toml
     return toml.load(config_filepath)
@@ -36,10 +42,10 @@ run_with_api:
     will be in the config_filepath. 
 """
 def run_with_api(executable_filepath, config_filepath):
-    print(f"executable filepath: {executable_filepath}")
-    print(f"config filepath: {config_filepath}")
+    printd(f"executable filepath: {executable_filepath}")
+    printd(f"config filepath: {config_filepath}")
     config = open_config(config_filepath)
-    print(f"python config: {config}")
+    printd(f"python config: {config}")
 
 if __name__ == "__main__":
     import sys
